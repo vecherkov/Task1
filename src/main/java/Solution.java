@@ -10,21 +10,25 @@ public class Solution {
      * Complete the solve function below.
      */
     private static int solve(int[] t) {
-        int[] arrayOld = t.clone();
-        for(int i = t.length-1 ; i > 0 ; i--){
-            for(int j = 0 ; j < i ; j++){
-            if( t[j] > t[j+1] ){
-                int tmp = t[j];
-                t[j] = t[j+1];
-                t[j+1] = tmp;
+
+        int id = 0;
+        int countMax = 0;
+        int count = 0;
+
+        for (int i = t.length-1; i > 0; i--) {
+            if (t[i] >= t[i-1]) {
+                count++;
+            } else {
+                if(countMax < count){
+                    countMax = count;
+                    count = 0;
+                    id = i;
+                }
+
             }
         }
-    }
-        for (int i = 0; i < arrayOld.length; i++) {
-            if(arrayOld[i] == t[0])
-            return i+1;
-        }
-        return 1;
+
+        return id+1;
     }
 
     private static final Scanner scanner = new Scanner(System.in);
